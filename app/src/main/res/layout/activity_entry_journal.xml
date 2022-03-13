@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    tools:context=".EntryJournalActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/journeyTitle"
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:id="@+id/journeyTitle"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toBottomOf="@+id/journeyTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <Button
+        android:id="@+id/openCameraBtn"
+        app:layout_constraintTop_toBottomOf="@id/imageView"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OpenCamera"
+        />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/titleHint"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/openCameraBtn"
+        />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/descriptionHint"
+        android:padding="10dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        />
+<!--    <DatePicker-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/description"-->
+<!--        />-->
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompactWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/journeyMap"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:id="@+id/journeyMap"
+
+            />
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:id="@+id/addLocation"
+            android:background="@color/white"
+            android:elevation="3dp"
+            android:src="@drawable/ic_baseline_location_on_24"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutCompactWrapper"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Add"
+        android:backgroundTint="@color/primaryColor"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+    <Button
+        android:id="@+id/openDatePicker"
+        app:layout_constraintTop_toBottomOf="@id/addButton"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open date picker"
+        />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
