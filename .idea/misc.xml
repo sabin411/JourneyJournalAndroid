@@ -23,7 +23,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_test_login.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/app_bar_dashboard_journey_journal.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/content_dash_board.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/content_dashboard_journey_journal.xml" value="0.35625" />
@@ -45,5 +46,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.33" />
+      </ProjectState>
+    </option>
   </component>
 </project>

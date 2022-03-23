@@ -6,17 +6,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ismt.ismtproject.database.User;
 import com.ismt.ismtproject.database.UserRepo;
+import com.ismt.ismtproject.ui.UserHelperClass;
+//import cool.graph.cuid.Cuid;
 
 public class SignupActivity extends AppCompatActivity {
     private UserRepo userRepo;
-
     private Button signupButtonId;
     private TextInputEditText emailInput, passwordInput, nameInput, phoneNumberInput, addressInput;
+
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
 //    validation check
     public static boolean isNull(EditText textValue, String error_message){
@@ -62,10 +71,31 @@ public class SignupActivity extends AppCompatActivity {
             }
             else {
                 Toast.makeText(SignupActivity.this, "You have successfully signed up", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignupActivity.this, DashboardJourneyJournal.class);
-                startActivity(intent);
-                User user = new User(name, 12, phone, address,email, password);
-                userRepo.createUser(user);
+
+                rootNode = FirebaseDatabase.getInstance();
+                reference = rootNode.getReference();
+
+                UserHelperClass helperClass = new UserHelperClass(name, email, phone, address, password);
+//                String cuid = Cuid.createCuid();
+
+
+                reference.child("users").child(phone).setValue(helperClass).addOnSuccessListener(
+                        new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                System.out.println("success");
+                            }
+                        }
+                ).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("failed" + e);
+                    }
+                });
+//                Intent intent = new Intent(SignupActivity.this, DashboardJourneyJournal.class);
+//                startActivity(intent);
+//                User user = new User(name, 12, phone, address,email, password);
+//                userRepo.createUser(user);
             }
         });
 
