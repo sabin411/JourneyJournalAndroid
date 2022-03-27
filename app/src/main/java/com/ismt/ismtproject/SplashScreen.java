@@ -44,7 +44,7 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(() -> {
 //            check whether user is loggedin or not
             if(!check){
-                startActivity(new Intent(this, SignupActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
             }
             else{
 //            intent to login screen

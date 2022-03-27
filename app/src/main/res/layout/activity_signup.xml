@@ -7,6 +7,7 @@
     android:theme="@style/Theme.AppCompat.Light.NoActionBar"
     >
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -211,6 +212,7 @@
                 app:cornerRadius="25dp"
                 />
                     <TextView
+                        android:id="@+id/loginLink"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Already have and account? Log in."
