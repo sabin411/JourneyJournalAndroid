@@ -17,18 +17,19 @@
         <entry key="app/src/main/res/layout/activity_entry_journal.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_google_login.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_google_sign_in.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/activity_journal_entry.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_journal_entry.xml" value="0.3076766967773437" />
         <entry key="app/src/main/res/layout/activity_location_access.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.31657257080078127" />
         <entry key="app/src/main/res/layout/activity_test_login.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/app_bar_dashboard_journey_journal.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/content_dash_board.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/content_dashboard_journey_journal.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/content_dashboard_journey_journal.xml" value="0.3463541666666667" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/dialogecontent.xml" value="0.2889450073242187" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_first2.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.35625" />
@@ -36,6 +37,7 @@
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/fragment_second2.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.4576980590820312" />
         <entry key="app/src/main/res/layout/nav_header_dashboard_journey_journal.xml" value="0.35625" />
         <entry key="app/src/main/res/xml/provider_paths.xml" value="0.35625" />
       </map>

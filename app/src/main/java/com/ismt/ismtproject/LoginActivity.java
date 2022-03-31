@@ -125,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         Query checkUser = reference.orderByChild("email").equalTo(userEnteredEmail);
 
+
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -145,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
                         String emailFromDB = snapshot.child(userEnteredEmail).child("email").getValue(String.class);
                         String phoneFromDB = snapshot.child(userEnteredEmail).child("phone").getValue(String.class);
                         String addressFromDB = snapshot.child(userEnteredEmail).child("address").getValue(String.class);
+                        String imageFromDB = snapshot.child(userEnteredEmail).child("imageUrl").getValue(String.class);
 
                         Intent intent = new Intent(getApplicationContext(), DashboardJourneyJournal.class);
                         intent.putExtra("name", nameFromDB);
@@ -152,6 +154,7 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("phone", phoneFromDB);
                         intent.putExtra("address", addressFromDB);
                         intent.putExtra("password", passwordFromDB);
+                        intent.putExtra("profileUrl", imageFromDB);
                     }
                 }
                 else {

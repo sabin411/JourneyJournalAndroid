@@ -11,10 +11,14 @@
     <color name="gheeColor">#FFF7B8</color>
     <color name="buttonColor">#FFF290</color>
     <color name="primaryColor">#FF6856</color>
+    <color name="primaryColorDim">#FFF7F5</color>
     <color name="whiteSmoke">#F7F7FB</color>
     <color name="fontBlueColor">#10153A</color>
     <color name="fadedBlack">#999999</color>
+    <color name="lightGray">#AEAEAE</color>
     <color name="grayColor">#EBEBEB</color>
+    <color name="danger_red">#f44949</color>
+
 
     <color name="green">#50F4C6</color>
 </resources>

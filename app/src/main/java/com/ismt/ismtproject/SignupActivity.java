@@ -97,6 +97,7 @@ public class SignupActivity extends AppCompatActivity {
                             FirebaseUser rUser = FirebaseAuth.getInstance().getCurrentUser();
                             assert rUser != null;
                             String userId = rUser.getUid();
+                            String userEmail = rUser.getEmail();
                             reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("userId", userId);
@@ -104,6 +105,7 @@ public class SignupActivity extends AppCompatActivity {
                             hashMap.put("phone", phone);
                             hashMap.put("address", address);
                             hashMap.put("imageUrl", "default");
+                            hashMap.put("email", userEmail);
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

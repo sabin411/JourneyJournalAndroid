@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -24,10 +25,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -40,6 +44,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class JournalEntry extends AppCompatActivity {
     public static final int CAMERA_PERMISSION_CODE = 101;
@@ -47,8 +52,10 @@ public class JournalEntry extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     public static final int GALLERY_REQUEST_CODE = 105;
     private Button add_photo_btn, journalSaveButton, select_photo_btn;
-    private TextInputEditText locationName, description;
+    private TextInputEditText locationName, description, caption, date;
     private ImageView backArrow, location_image;
+
+    public String ImageUrl;
 
     String currentPhotoPath;
 
@@ -68,9 +75,13 @@ public class JournalEntry extends AppCompatActivity {
         journalSaveButton = findViewById(R.id.journalSaveButton);
         locationName = findViewById(R.id.locationName);
         description = findViewById(R.id.description);
+        caption = findViewById(R.id.caption);
+        date = findViewById(R.id.date);
+
         backArrow = findViewById(R.id.backArrow);
         location_image = findViewById(R.id.location_image);
 
+        mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
 
         backArrow.setOnClickListener(view-> {
@@ -87,9 +98,77 @@ public class JournalEntry extends AppCompatActivity {
             Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(gallery, GALLERY_REQUEST_CODE);
         });
+
+        journalSaveButton.setOnClickListener(view -> {
+            saveEntry();
+        });
     }
 
-    private void askCameraPermission() {
+    private void saveEntry() {
+        String userEnteredLocationName = locationName.getText().toString().trim();
+        String userEnteredDescription = description.getText().toString().trim();
+        String userEnteredCaption = caption.getText().toString().trim();
+        String userEnteredDate = date.getText().toString().trim();
+
+        FirebaseUser rUser = FirebaseAuth.getInstance().getCurrentUser();
+        assert rUser != null;
+        String userId = rUser.getUid();
+        reference = FirebaseDatabase.getInstance().getReference("Entries").child(userId);
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("userId", userId);
+        hashMap.put("placeName", userEnteredLocationName);
+        hashMap.put("description", userEnteredDescription);
+        hashMap.put("locationImage", ImageUrl);
+        hashMap.put("shortCaption", userEnteredCaption);
+        hashMap.put("date", userEnteredDate);
+        String entryId = reference.push().getKey();
+        hashMap.put("journalKey", entryId);
+        reference.child(entryId).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(JournalEntry.this, "success" + task.getResult(), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(JournalEntry.this, DashboardJourneyJournal.class));
+                }
+                else{
+                    Toast.makeText(JournalEntry.this, "Failed look once", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+
+
+
+//        String userEnteredLocationName = locationName.getText().toString().trim();
+//        String userEnteredDescription = description.getText().toString().trim();
+//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+//        assert firebaseUser != null;
+//        String userId = firebaseUser.getUid();
+//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("JourneyEntry").child(userId);
+//
+//        HashMap<String, String> hashMap = new HashMap<>();
+//        hashMap.put("placeName", userEnteredLocationName);
+//        hashMap.put("description", userEnteredDescription);
+//        hashMap.put("locationImage", ImageUrl);
+//        databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//                if(task.isSuccessful()){
+//                    Toast.makeText(JournalEntry.this, "success", Toast.LENGTH_SHORT).show();
+//                    startActivity(new Intent(JournalEntry.this, DashboardJourneyJournal.class));
+//                }
+//                else {
+//                    Toast.makeText(JournalEntry.this, "Failed look once", Toast.LENGTH_SHORT).show();
+//
+//                }
+//            }
+//        });
+
+
+    }
+
+    public void askCameraPermission() {
         if(ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
         }
@@ -145,14 +224,17 @@ public class JournalEntry extends AppCompatActivity {
     }
 
     private void uploadImageToFirebase(String imageFileName, Uri contentUri) {
-            final StorageReference image = storageReference.child("image/" + imageFileName);
+
+        final StorageReference image = storageReference.child("image/" + imageFileName);
             image.putFile(contentUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     image.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+
                             Picasso.get().load(uri).into(location_image);
+                            ImageUrl = uri.toString();
                             Log.d("tag", "on Success: Uploaded Image url is : " + uri.toString());
                         }
                     });
