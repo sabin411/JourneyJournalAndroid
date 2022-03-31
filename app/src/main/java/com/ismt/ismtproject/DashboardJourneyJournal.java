@@ -1,9 +1,14 @@
 package com.ismt.ismtproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.model.Dash;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -14,12 +19,20 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.ismt.ismtproject.databinding.ActivityDashboardJourneyJournalBinding;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DashboardJourneyJournal extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityDashboardJourneyJournalBinding binding;
+    private FloatingActionButton fab;
+    private Button logoutBtn;
+    private CircleImageView profileImage;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +40,27 @@ public class DashboardJourneyJournal extends AppCompatActivity {
 
         binding = ActivityDashboardJourneyJournalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        fab = findViewById(R.id.fab);
+        logoutBtn = findViewById(R.id.logoutBtn);
+
+
+
+
+
+        mAuth = FirebaseAuth.getInstance();
+        logoutBtn.setOnClickListener(view -> {
+            mAuth.signOut();
+            Toast.makeText(DashboardJourneyJournal.this, "Logging Out", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(DashboardJourneyJournal.this, MainActivity.class));
+        });
+
+
 
         setSupportActionBar(binding.appBarDashboardJourneyJournal.toolbar);
         binding.appBarDashboardJourneyJournal.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                startActivity(new Intent(DashboardJourneyJournal.this, JournalEntry.class));
             }
         });
         DrawerLayout drawer = binding.drawerLayout;

@@ -19,6 +19,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 //    private ActivityMainBinding binding;
     private Button loginBtn;
     private Button signupButton;
+    FirebaseAuth mAuth;
 
 
 
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         signupButton = findViewById(R.id.signupButton);
         loginBtn = findViewById(R.id.loginBtn);
+        mAuth = FirebaseAuth.getInstance();
 
         loginBtn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -45,6 +49,19 @@ public class MainActivity extends AppCompatActivity {
             startActivity(signupIntent);
         });
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser == null){
+         startActivity(new Intent(MainActivity.this, LoginActivity.class));
+        }
+        else {
+            startActivity(new Intent(MainActivity.this, DashboardJourneyJournal.class));
+        }
     }
 
     public static class google_login extends AppCompatActivity {
