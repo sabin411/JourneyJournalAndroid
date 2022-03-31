@@ -83,6 +83,7 @@
                 android:layout_marginEnd="20dp"
                 >
                 <TextView
+                    android:id="@+id/greeting_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Hi Sabin! 👋🏻"
@@ -123,7 +124,8 @@
 
 
     <include layout="@layout/content_dashboard_journey_journal"
-        android:layout_height="460dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="280dp"
         android:layout_width="match_parent"
         android:layout_gravity="bottom"
         />
