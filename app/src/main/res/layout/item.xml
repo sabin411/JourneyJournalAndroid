@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/profile"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 />
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -122,8 +122,17 @@
             android:backgroundTint="@color/danger_red"
             android:layout_marginLeft="10dp"
             />
+        <Button
+            app:layout_constraintTop_toBottomOf="@id/delete_btn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:id="@+id/share_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:backgroundTint="@color/midBlack"
+            android:layout_marginLeft="10dp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.cardview.widget.CardView>

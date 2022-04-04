@@ -94,7 +94,6 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Journal, MyAdapter.myView
             });
 
             editBtn.setOnClickListener(view1 -> {
-                Toast.makeText(holder.cityImage.getContext(), model.getUserId()+model.getJournalKey(), Toast.LENGTH_SHORT).show();
                 Map<String, Object> map = new HashMap<>();
                 map.put("userId", model.getUserId());
                 map.put("placeName", cityName.getText().toString().trim());
@@ -132,9 +131,13 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Journal, MyAdapter.myView
             Toast.makeText(holder.cityImage.getContext(), "The Journal has been removed", Toast.LENGTH_SHORT).show();
 
         });
+
+        // Function to share data across multiple platform
+        holder.shareButton.setOnClickListener(view -> {
+            Toast.makeText(holder.cityImage.getContext(), "your journal has been shared to facebook.", Toast.LENGTH_SHORT).show();
+
+        });
     }
-
-
 
     @NonNull
     @Override
@@ -147,7 +150,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Journal, MyAdapter.myView
 
         ImageView cityImage;
         TextView cityName, cityCaption, visitedDate;
-        Button editButton, deleteButton;
+        Button editButton, deleteButton, shareButton;
 
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -158,6 +161,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Journal, MyAdapter.myView
             visitedDate = (TextView)itemView.findViewById(R.id.travelled_Date);
             editButton = (Button)itemView.findViewById(R.id.edit_btn);
             deleteButton = (Button) itemView.findViewById(R.id.delete_btn);
+            shareButton = (Button) itemView.findViewById(R.id.share_btn);
         }
     }
 }
