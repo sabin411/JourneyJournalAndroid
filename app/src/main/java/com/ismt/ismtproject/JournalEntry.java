@@ -132,39 +132,9 @@ public class JournalEntry extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(JournalEntry.this, "Failed look once", Toast.LENGTH_SHORT).show();
-
                 }
             }
         });
-
-
-
-
-//        String userEnteredLocationName = locationName.getText().toString().trim();
-//        String userEnteredDescription = description.getText().toString().trim();
-//        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//        assert firebaseUser != null;
-//        String userId = firebaseUser.getUid();
-//        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("JourneyEntry").child(userId);
-//
-//        HashMap<String, String> hashMap = new HashMap<>();
-//        hashMap.put("placeName", userEnteredLocationName);
-//        hashMap.put("description", userEnteredDescription);
-//        hashMap.put("locationImage", ImageUrl);
-//        databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//                if(task.isSuccessful()){
-//                    Toast.makeText(JournalEntry.this, "success", Toast.LENGTH_SHORT).show();
-//                    startActivity(new Intent(JournalEntry.this, DashboardJourneyJournal.class));
-//                }
-//                else {
-//                    Toast.makeText(JournalEntry.this, "Failed look once", Toast.LENGTH_SHORT).show();
-//
-//                }
-//            }
-//        });
-
 
     }
 
@@ -204,8 +174,6 @@ public class JournalEntry extends AppCompatActivity {
             Uri contentUri = Uri.fromFile(f);
             mediaScanIntent.setData(contentUri);
             this.sendBroadcast(mediaScanIntent);
-
-
             uploadImageToFirebase(f.getName(),contentUri);
         }
 
@@ -274,7 +242,6 @@ public class JournalEntry extends AppCompatActivity {
     }
     
     private void dispatchTakePictureIntent() {
-
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
 //        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
